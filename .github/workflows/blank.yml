@@ -1,0 +1,16 @@
+name: Notify Discord on Issue Closure
+
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  notification:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Notify Discord
+      uses: Ilshidur/action-discord@v2
+      with:
+        args: "An issue was closed: ${{ github.event.issue.html_url }}"
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }} # You must set this secret in your repository settings
